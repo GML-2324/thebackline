@@ -107,3 +107,85 @@ if (layer1 && layer2) {
         }
     }, 5000); // 5 seconds per slide
 }
+
+// Services Carousel - Infinite Loop
+const servicesTrack = document.querySelector('.services-track');
+const prevBtn = document.querySelector('.carousel-prev');
+const nextBtn = document.querySelector('.carousel-next');
+
+if (servicesTrack && prevBtn && nextBtn) {
+    const originalCards = Array.from(servicesTrack.children);
+    const totalOriginal = originalCards.length;
+    let isTransitioning = false;
+
+    // Clone all cards and append/prepend for seamless loop
+    originalCards.forEach(card => {
+        const cloneFront = card.cloneNode(true);
+        const cloneBack = card.cloneNode(true);
+        servicesTrack.appendChild(cloneFront);
+    });
+    // Prepend clones at start
+    for (let i = totalOriginal - 1; i >= 0; i--) {
+        const cloneBack = originalCards[i].cloneNode(true);
+        servicesTrack.prepend(cloneBack);
+    }
+
+    function getCardWidth() {
+        const card = servicesTrack.querySelector('.service-card');
+        const style = getComputedStyle(servicesTrack);
+        const gap = parseInt(style.gap) || 24;
+        return card.offsetWidth + gap;
+    }
+
+    // Start at the first real card (after prepended clones)
+    let currentIndex = totalOriginal;
+
+    function setPositionInstant(index) {
+        servicesTrack.style.transition = 'none';
+        servicesTrack.style.transform = `translateX(-${index * getCardWidth()}px)`;
+        // Force reflow
+        servicesTrack.offsetHeight;
+    }
+
+    function slideTo(index) {
+        servicesTrack.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+        servicesTrack.style.transform = `translateX(-${index * getCardWidth()}px)`;
+    }
+
+    // Initialize position
+    setPositionInstant(currentIndex);
+
+    nextBtn.addEventListener('click', () => {
+        if (isTransitioning) return;
+        isTransitioning = true;
+        currentIndex++;
+        slideTo(currentIndex);
+    });
+
+    prevBtn.addEventListener('click', () => {
+        if (isTransitioning) return;
+        isTransitioning = true;
+        currentIndex--;
+        slideTo(currentIndex);
+    });
+
+    servicesTrack.addEventListener('transitionend', () => {
+        isTransitioning = false;
+        // Scrolled into the appended clones — jump back to equivalent real card
+        if (currentIndex >= totalOriginal * 2) {
+            currentIndex -= totalOriginal;
+            setPositionInstant(currentIndex);
+        }
+        // Scrolled into the prepended clones — jump forward to equivalent real card
+        if (currentIndex < totalOriginal) {
+            currentIndex += totalOriginal;
+            setPositionInstant(currentIndex);
+        }
+    });
+
+    // Reset on resize
+    window.addEventListener('resize', () => {
+        currentIndex = totalOriginal;
+        setPositionInstant(currentIndex);
+    });
+}
