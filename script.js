@@ -114,6 +114,7 @@ const prevBtn = document.querySelector('.carousel-prev');
 const nextBtn = document.querySelector('.carousel-next');
 
 if (servicesTrack && prevBtn && nextBtn) {
+    const carouselContainer = document.querySelector('.services-carousel');
     const originalCards = Array.from(servicesTrack.children);
     const totalOriginal = originalCards.length;
     let isTransitioning = false;
@@ -121,20 +122,25 @@ if (servicesTrack && prevBtn && nextBtn) {
     // Clone all cards and append/prepend for seamless loop
     originalCards.forEach(card => {
         const cloneFront = card.cloneNode(true);
-        const cloneBack = card.cloneNode(true);
         servicesTrack.appendChild(cloneFront);
     });
-    // Prepend clones at start
     for (let i = totalOriginal - 1; i >= 0; i--) {
         const cloneBack = originalCards[i].cloneNode(true);
         servicesTrack.prepend(cloneBack);
     }
 
+    // Set explicit card widths based on carousel container
+    function sizeCards() {
+        const w = carouselContainer.offsetWidth;
+        const allCards = servicesTrack.querySelectorAll('.service-card');
+        allCards.forEach(card => {
+            card.style.width = w + 'px';
+            card.style.minWidth = w + 'px';
+        });
+    }
+
     function getCardWidth() {
-        const card = servicesTrack.querySelector('.service-card');
-        const style = getComputedStyle(servicesTrack);
-        const gap = parseInt(style.gap) || 24;
-        return card.offsetWidth + gap;
+        return carouselContainer.offsetWidth;
     }
 
     // Start at the first real card (after prepended clones)
@@ -143,7 +149,6 @@ if (servicesTrack && prevBtn && nextBtn) {
     function setPositionInstant(index) {
         servicesTrack.style.transition = 'none';
         servicesTrack.style.transform = `translateX(-${index * getCardWidth()}px)`;
-        // Force reflow
         servicesTrack.offsetHeight;
     }
 
@@ -152,7 +157,8 @@ if (servicesTrack && prevBtn && nextBtn) {
         servicesTrack.style.transform = `translateX(-${index * getCardWidth()}px)`;
     }
 
-    // Initialize position
+    // Initialize
+    sizeCards();
     setPositionInstant(currentIndex);
 
     nextBtn.addEventListener('click', () => {
@@ -185,6 +191,7 @@ if (servicesTrack && prevBtn && nextBtn) {
 
     // Reset on resize
     window.addEventListener('resize', () => {
+        sizeCards();
         currentIndex = totalOriginal;
         setPositionInstant(currentIndex);
     });

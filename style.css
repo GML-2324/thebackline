@@ -402,8 +402,11 @@ h6 {
 .services-carousel-wrapper {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 20px;
     position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
 .carousel-arrow {
@@ -436,6 +439,7 @@ h6 {
 .services-carousel {
     overflow: hidden;
     flex: 1;
+    min-width: 0;
 }
 
 .services-track {
@@ -445,10 +449,9 @@ h6 {
 }
 
 .service-card {
-    min-width: 100%;
-    padding: 60px 80px;
+    flex: 0 0 auto;
+    padding: 60px 20px;
     text-align: center;
-    transition: all 0.3s ease;
     cursor: default;
     box-sizing: border-box;
     display: flex;
@@ -458,24 +461,23 @@ h6 {
 }
 
 .service-card h3 {
-    color: var(--primary-bg);
+    color: var(--accent);
     font-size: 2rem;
     font-weight: 600;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
 .service-card p {
     color: var(--grey-text);
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     font-weight: 300;
-    line-height: 1.8;
-    max-width: 700px;
+    line-height: 1.6;
 }
 
 /* Footer Section */
 .footer {
-    background-color: var(--secondary-bg);
-    color: var(--light-text);
+    background-color: var(--primary-bg);
+    color: var(--body-text);
     padding-top: 80px;
 }
 
@@ -514,14 +516,14 @@ h6 {
 }
 
 .social-icons a {
-    color: var(--primary-bg);
+    color: var(--body-text);
     width: 40px;
     height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease;
 }
 
@@ -536,7 +538,7 @@ h6 {
 }
 
 .footer-col h3 {
-    color: var(--accent);
+    color: var(--secondary-bg);
     font-size: 1.1rem;
     font-weight: 600;
     margin-bottom: 20px;
@@ -553,7 +555,7 @@ h6 {
 
 .footer-col ul li a,
 .footer-col ul li {
-    color: var(--light-text);
+    color: var(--grey-text);
     text-decoration: none;
     font-size: 0.95rem;
     transition: color 0.3s ease;
@@ -567,21 +569,28 @@ h6 {
 }
 
 .footer-bottom {
-    border-top: 1px solid #2A2A2A;
+    border-top: 1px solid #e0e0e0;
     padding: 20px 0;
     text-align: center;
 }
 
 .footer-bottom p {
-    color: #666666;
+    color: var(--grey-text);
     font-size: 0.9rem;
     font-weight: 300;
 }
 
 /* Responsive Design */
+
+/* Tablets */
 @media screen and (max-width: 1024px) {
     .hero-title {
-        font-size: 4rem;
+        font-size: 1.8rem;
+    }
+
+    .hero-tagline {
+        font-size: 1rem;
+        letter-spacing: 0.15em;
     }
 
     .about-content {
@@ -593,7 +602,11 @@ h6 {
     }
 
     .service-card {
-        padding: 40px 40px;
+        padding: 40px 20px;
+    }
+
+    .service-card h3 {
+        font-size: 1.6rem;
     }
 
     .footer-container {
@@ -603,8 +616,13 @@ h6 {
     .brand-col {
         grid-column: 1 / -1;
     }
+
+    .services-carousel-wrapper {
+        max-width: 100%;
+    }
 }
 
+/* Small tablets / large phones */
 @media screen and (max-width: 768px) {
     .burger {
         display: block;
@@ -630,25 +648,38 @@ h6 {
         margin-bottom: 30px;
     }
 
+    .nav-links a {
+        color: var(--body-text) !important;
+        font-size: 1.1rem;
+    }
+
     .nav-active {
         transform: translateX(0%);
     }
 
+    .logo img {
+        height: 60px;
+        transform: scale(1.2);
+    }
+
     .hero-title {
-        font-size: 3rem;
+        font-size: 1.5rem;
+        white-space: normal;
+        padding: 0 15px;
     }
 
     .hero-tagline {
-        font-size: 1.2rem;
+        font-size: 0.85rem;
+        letter-spacing: 0.1em;
     }
 
     .ticker {
-        height: 60px;
+        height: 50px;
     }
 
     .ticker-content img {
-        height: 30px;
-        padding: 0 25px;
+        height: 25px;
+        padding: 0 20px;
     }
 
     .about {
@@ -659,48 +690,183 @@ h6 {
         flex-direction: column;
     }
 
+    .about-text h2 {
+        font-size: 2rem;
+    }
+
+    .about-text p {
+        font-size: 0.95rem;
+    }
+
     .about-image {
-        height: 400px;
-        margin-top: 40px;
+        height: 350px;
+        max-width: 100%;
+        margin-top: 30px;
+        transform: rotate(0deg);
+    }
+
+    .about-image::before {
+        display: none;
     }
 
     .services {
-        padding: 60px 20px;
+        padding: 60px 15px;
+    }
+
+    .section-header h2 {
+        font-size: 2rem;
+    }
+
+    .section-header .subtitle {
+        font-size: 1rem;
     }
 
     .service-card {
-        padding: 30px 20px;
+        padding: 30px 15px;
     }
 
     .service-card h3 {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
     }
 
     .service-card p {
-        font-size: 1rem;
+        font-size: 0.9rem;
+    }
+
+    .carousel-arrow {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+    }
+
+    .carousel-arrow svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .services-carousel-wrapper {
+        gap: 10px;
+    }
+
+    .footer {
+        padding-top: 50px;
     }
 
     .footer-container {
         grid-template-columns: 1fr;
         gap: 30px;
+        padding: 0 20px;
     }
 
-    .section-header h2 {
-        font-size: 2.5rem;
+    .footer-col h3 {
+        font-size: 1rem;
+    }
+
+    .footer-bottom {
+        padding: 15px 0;
     }
 }
 
+/* Small phones (iPhone SE, etc.) */
 @media screen and (max-width: 480px) {
-    .hero-title {
-        font-size: 2.5rem;
+    :root {
+        --nav-height: 60px;
     }
 
-    .about-image {
-        height: 300px;
+    .logo img {
+        height: 50px;
+        transform: scale(1);
+    }
+
+    .nav-container {
+        padding: 0 15px;
+    }
+
+    .hero-title {
+        font-size: 1.2rem;
+        padding: 0 10px;
+    }
+
+    .hero-tagline {
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+    }
+
+    .hero-overlay {
+        padding: 0 10px;
+    }
+
+    .ticker {
+        height: 40px;
+    }
+
+    .ticker-content img {
+        height: 18px;
+        padding: 0 15px;
+    }
+
+    .about {
+        padding: 40px 15px;
     }
 
     .about-text h2 {
-        font-size: 2rem;
+        font-size: 1.6rem;
+    }
+
+    .about-text p {
+        font-size: 0.9rem;
+    }
+
+    .about-image {
+        height: 250px;
+    }
+
+    .about-image-wrapper {
+        padding: 0;
+    }
+
+    .label {
+        font-size: 0.75rem;
+    }
+
+    .section-header h2 {
+        font-size: 1.6rem;
+    }
+
+    .section-header .subtitle {
+        font-size: 0.85rem;
+    }
+
+    .services {
+        padding: 40px 10px;
+    }
+
+    .service-card h3 {
+        font-size: 1.2rem;
+    }
+
+    .service-card p {
+        font-size: 0.85rem;
+    }
+
+    .carousel-arrow {
+        width: 32px;
+        height: 32px;
+        min-width: 32px;
+    }
+
+    .footer-container {
+        padding: 0 15px;
+        gap: 25px;
+    }
+
+    .social-icons a {
+        width: 35px;
+        height: 35px;
+    }
+
+    .footer-bottom p {
+        font-size: 0.8rem;
     }
 }
 
