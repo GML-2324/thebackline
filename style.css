@@ -551,6 +551,14 @@ h6 {
 
 .footer-col ul li {
     margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.footer-col ul li svg {
+    flex-shrink: 0;
+    color: var(--grey-text);
 }
 
 .footer-col ul li a,
@@ -568,6 +576,25 @@ h6 {
     text-underline-offset: 4px;
 }
 
+.btn-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #25D366;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.btn-whatsapp:hover {
+    background-color: #1DA851;
+    transform: translateY(-2px);
+}
 .footer-bottom {
     border-top: 1px solid #e0e0e0;
     padding: 20px 0;
@@ -578,6 +605,20 @@ h6 {
     color: var(--grey-text);
     font-size: 0.9rem;
     font-weight: 300;
+}
+
+.footer-bottom p a {
+    color: var(--body-text);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.footer-bottom p a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-underline-offset: 2px;
 }
 
 /* Responsive Design */
