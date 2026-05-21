@@ -289,8 +289,6 @@ h6 {
 .about {
     padding: 100px 20px;
     background-color: var(--primary-bg);
-    content-visibility: auto;
-    contain-intrinsic-size: 1px 800px;
 }
 
 .container {
@@ -392,8 +390,6 @@ h6 {
 .services {
     padding: 100px 20px;
     background-color: #111111;
-    content-visibility: auto;
-    contain-intrinsic-size: 1px 1000px;
 }
 
 .services .section-header h2 {
@@ -746,6 +742,10 @@ h6 {
 
     .about-text p {
         font-size: 0.95rem;
+    }
+
+    .about-image-wrapper {
+        width: 100%;
     }
 
     .about-image {
