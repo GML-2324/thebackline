@@ -78,20 +78,34 @@ function shuffle(array) {
     return array;
 }
 
-const shuffledImages = shuffle([...carouselImages]);
-let currentImageIndex = 0;
+// Read the pre-shuffled images from window if available (initialized in head)
+const shuffledImages = window.shuffledCarouselImages || shuffle([...carouselImages]);
+let currentImageIndex = window.currentCarouselIndex !== undefined ? window.currentCarouselIndex : 0;
 
 const layer1 = document.getElementById('slide-layer-1');
 const layer2 = document.getElementById('slide-layer-2');
 let activeLayer = layer1;
 
-// Initialize first image
+// Function to preload a specific image index
+function preloadImage(index) {
+    const nextUrl = shuffledImages[index % shuffledImages.length];
+    const img = new Image();
+    img.src = nextUrl;
+}
+
+// Initialize and begin carousel rotation
 if (layer1 && layer2) {
-    layer1.style.backgroundImage = `url('${shuffledImages[0]}')`;
+    // If the background wasn't set inline, set it now as a fallback
+    if (!layer1.style.backgroundImage) {
+        layer1.style.backgroundImage = `url('${shuffledImages[0]}')`;
+    }
+    
+    // We are currently showing image 0. Point index to next image (1) and preload it immediately.
     currentImageIndex++;
+    preloadImage(currentImageIndex);
 
     setInterval(() => {
-        const nextImageUrl = shuffledImages[currentImageIndex];
+        const nextImageUrl = shuffledImages[currentImageIndex % shuffledImages.length];
         const nextLayer = activeLayer === layer1 ? layer2 : layer1;
         
         nextLayer.style.backgroundImage = `url('${nextImageUrl}')`;
@@ -100,11 +114,14 @@ if (layer1 && layer2) {
         
         activeLayer = nextLayer;
         
+        // Move to the next image slot
         currentImageIndex++;
-        if (currentImageIndex >= shuffledImages.length) {
-            shuffle(shuffledImages);
-            currentImageIndex = 0;
-        }
+        
+        // Preload the next image 2.5 seconds before the transition fires
+        setTimeout(() => {
+            preloadImage(currentImageIndex);
+        }, 2500);
+        
     }, 5000); // 5 seconds per slide
 }
 
@@ -196,3 +213,36 @@ if (servicesTrack && prevBtn && nextBtn) {
         setPositionInstant(currentIndex);
     });
 }
+
+// Lazy load elements with CSS background-images (like TEAM.png) when they enter the viewport
+document.addEventListener('DOMContentLoaded', () => {
+    const lazyBgElements = document.querySelectorAll('.lazy-bg');
+    if ('IntersectionObserver' in window) {
+        const lazyBgObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const bgUrl = el.getAttribute('data-bg');
+                    if (bgUrl) {
+                        el.style.backgroundImage = `url('${bgUrl}')`;
+                        el.classList.add('lazy-bg-loaded');
+                    }
+                    observer.unobserve(el);
+                }
+            });
+        }, {
+            rootMargin: '100px 0px', // Start loading 100px before entry for seamless experience
+            threshold: 0.01
+        });
+        lazyBgElements.forEach(el => lazyBgObserver.observe(el));
+    } else {
+        // Fallback for older browsers
+        lazyBgElements.forEach(el => {
+            const bgUrl = el.getAttribute('data-bg');
+            if (bgUrl) {
+                el.style.backgroundImage = `url('${bgUrl}')`;
+                el.classList.add('lazy-bg-loaded');
+            }
+        });
+    }
+});

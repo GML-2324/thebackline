@@ -289,6 +289,8 @@ h6 {
 .about {
     padding: 100px 20px;
     background-color: var(--primary-bg);
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 800px;
 }
 
 .container {
@@ -344,12 +346,17 @@ h6 {
     width: 100%;
     max-width: 500px;
     height: 600px;
-    background-image: url('assets/TEAM.png');
     background-size: cover;
     background-position: center;
     position: relative;
     transform: rotate(3deg);
     z-index: 1;
+    opacity: 0;
+    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.about-image.lazy-bg-loaded {
+    opacity: 1;
 }
 
 .about-image::before {
@@ -385,6 +392,8 @@ h6 {
 .services {
     padding: 100px 20px;
     background-color: #111111;
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 1000px;
 }
 
 .services .section-header h2 {

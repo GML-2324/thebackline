@@ -8,6 +8,69 @@
     <meta name="description"
         content="The Backline is a professional backline rental and services company catering to live events, concerts, tours, and production companies.">
     <link rel="stylesheet" href="style.css">
+    <link rel="preload" href="assets/LogoW.png" as="image" fetchpriority="high">
+    <script>
+        // Critical Path: Select and preload first random hero slide immediately in the head
+        (function() {
+            const images = [
+                "assets/The Backline EP2 -16.jpg",
+                "assets/The Backline EP2 -18.jpg",
+                "assets/The Backline EP2 -3.jpg",
+                "assets/The Backline EP2 -8.jpg",
+                "assets/The Backline EP3-11.png",
+                "assets/The Backline EP3-15.png",
+                "assets/The Backline EP3-2.png",
+                "assets/The Backline EP3-5.png",
+                "assets/Vol 1-11.jpg",
+                "assets/Vol 1-114.jpg",
+                "assets/Vol 1-12.jpg",
+                "assets/Vol 1-41.jpg",
+                "assets/Vol 1-43.jpg",
+                "assets/Vol 1-53.jpg",
+                "assets/Vol 1-55.jpg",
+                "assets/Vol 1-56.jpg",
+                "assets/Vol 1-59.jpg",
+                "assets/Vol 1-6.jpg",
+                "assets/Vol 1-60.jpg",
+                "assets/Vol 1-74.jpg",
+                "assets/Vol 1-77.jpg",
+                "assets/Vol 1-79.jpg",
+                "assets/Vol 1-9.jpg",
+                "assets/Vol 4-20.jpg",
+                "assets/Vol 4-29.jpg",
+                "assets/Vol 4-32.jpg",
+                "assets/Vol 4-4.jpg",
+                "assets/Vol 4-44.jpg",
+                "assets/Vol 4-5.jpg",
+                "assets/Vol 4-55.jpg",
+                "assets/Vol 4-6.jpg"
+            ];
+            
+            const shuffled = [...images];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            
+            window.shuffledCarouselImages = shuffled;
+            window.currentCarouselIndex = 0;
+            
+            const firstImage = shuffled[0];
+            
+            // 1. Dynamic Preload Link
+            const link = document.createElement('link');
+            link.rel = 'preload';
+            link.as = 'image';
+            link.href = firstImage;
+            link.fetchPriority = 'high';
+            document.head.appendChild(link);
+            
+            // 2. Dynamic Style Injection for immediate background painting
+            const style = document.createElement('style');
+            style.innerHTML = `#slide-layer-1 { background-image: url('${firstImage}') !important; }`;
+            document.head.appendChild(style);
+        })();
+    </script>
 </head>
 
 <body>
@@ -15,8 +78,8 @@
     <nav class="navbar">
         <div class="nav-container">
             <a href="#home" class="logo">
-                <img src="assets/LogoW.png" alt="The Backline Logo" class="logo-white">
-                <img src="assets/Logo.png" alt="The Backline Logo" class="logo-dark">
+                <img src="assets/LogoW.png" alt="The Backline Logo" class="logo-white" fetchpriority="high">
+                <img src="assets/Logo.png" alt="The Backline Logo" class="logo-dark" fetchpriority="high">
             </a>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
@@ -46,100 +109,100 @@
         <div class="ticker">
             <div class="ticker-track">
                 <div class="ticker-content">
-                    <img src="assets/Ampeg_idPRZj28AB_0.png" alt="Ampeg">
-                    <img src="assets/Drum_worksh_logo.png" alt="DW">
-                    <img src="assets/Fender_guitars_logo.svg" alt="Fender">
-                    <img src="assets/Gibraltar_Logo-white.avif" alt="Gibraltar">
-                    <img src="assets/Gibson_Guitar_logo.svg" alt="Gibson">
-                    <img src="assets/Korg_logo.svg" alt="Korg">
-                    <img src="assets/LOGO-MARKBASS-3-2048x548.avif" alt="Markbass" class="blend-logo">
-                    <img src="assets/latin-percussion-logo-white.avif" alt="LP">
-                    <img src="assets/Mapex_drums_logo.png" alt="Mapex" class="blend-logo">
-                    <img src="assets/Marshall_logo.svg" alt="Marshall">
-                    <img src="assets/Martin_co_optimized_cleaned.svg" alt="Martin">
-                    <img src="assets/Meinl_cymbals_logo.png" alt="Meinl">
-                    <img src="assets/Mesa_Boogie_Engineering_Logo.svg" alt="Mesa Boogie" class="blend-logo">
-                    <img src="assets/Pearl_drum_logo.png" alt="Pearl">
-                    <img src="assets/Remo.svg" alt="Remo">
-                    <img src="assets/Roland_Corporation_logo.svg" alt="Roland">
-                    <img src="assets/Sabian_Cymbals_logo_2019.svg" alt="Sabian">
-                    <img src="assets/Sonor_logo.png" alt="Sonor">
-                    <img src="assets/Tamadrums_logo.png" alt="Tama">
-                    <img src="assets/Yamaha_logo.svg" alt="Yamaha">
-                    <img src="assets/Zildjian_Logo.svg" alt="Zildjian">
-                    <img src="assets/evans-drumheads-3.jpg" alt="Evans" class="blend-logo">
+                    <img src="assets/Ampeg_idPRZj28AB_0.png" alt="Ampeg" decoding="async">
+                    <img src="assets/Drum_worksh_logo.png" alt="DW" decoding="async">
+                    <img src="assets/Fender_guitars_logo.svg" alt="Fender" decoding="async">
+                    <img src="assets/Gibraltar_Logo-white.avif" alt="Gibraltar" decoding="async">
+                    <img src="assets/Gibson_Guitar_logo.svg" alt="Gibson" decoding="async">
+                    <img src="assets/Korg_logo.svg" alt="Korg" decoding="async">
+                    <img src="assets/LOGO-MARKBASS-3-2048x548.avif" alt="Markbass" class="blend-logo" decoding="async">
+                    <img src="assets/latin-percussion-logo-white.avif" alt="LP" decoding="async">
+                    <img src="assets/Mapex_drums_logo.png" alt="Mapex" class="blend-logo" decoding="async">
+                    <img src="assets/Marshall_logo.svg" alt="Marshall" decoding="async">
+                    <img src="assets/Martin_co_optimized_cleaned.svg" alt="Martin" decoding="async">
+                    <img src="assets/Meinl_cymbals_logo.png" alt="Meinl" decoding="async">
+                    <img src="assets/Mesa_Boogie_Engineering_Logo.svg" alt="Mesa Boogie" class="blend-logo" decoding="async">
+                    <img src="assets/Pearl_drum_logo.png" alt="Pearl" decoding="async">
+                    <img src="assets/Remo.svg" alt="Remo" decoding="async">
+                    <img src="assets/Roland_Corporation_logo.svg" alt="Roland" decoding="async">
+                    <img src="assets/Sabian_Cymbals_logo_2019.svg" alt="Sabian" decoding="async">
+                    <img src="assets/Sonor_logo.png" alt="Sonor" decoding="async">
+                    <img src="assets/Tamadrums_logo.png" alt="Tama" decoding="async">
+                    <img src="assets/Yamaha_logo.svg" alt="Yamaha" decoding="async">
+                    <img src="assets/Zildjian_Logo.svg" alt="Zildjian" decoding="async">
+                    <img src="assets/evans-drumheads-3.jpg" alt="Evans" class="blend-logo" decoding="async">
                 </div>
                 <div class="ticker-content">
-                    <img src="assets/Ampeg_idPRZj28AB_0.png" alt="Ampeg">
-                    <img src="assets/Drum_worksh_logo.png" alt="DW">
-                    <img src="assets/Fender_guitars_logo.svg" alt="Fender">
-                    <img src="assets/Gibraltar_Logo-white.avif" alt="Gibraltar">
-                    <img src="assets/Gibson_Guitar_logo.svg" alt="Gibson">
-                    <img src="assets/Korg_logo.svg" alt="Korg">
-                    <img src="assets/LOGO-MARKBASS-3-2048x548.avif" alt="Markbass" class="blend-logo">
-                    <img src="assets/latin-percussion-logo-white.avif" alt="LP">
-                    <img src="assets/Mapex_drums_logo.png" alt="Mapex" class="blend-logo">
-                    <img src="assets/Marshall_logo.svg" alt="Marshall">
-                    <img src="assets/Martin_co_optimized_cleaned.svg" alt="Martin">
-                    <img src="assets/Meinl_cymbals_logo.png" alt="Meinl">
-                    <img src="assets/Mesa_Boogie_Engineering_Logo.svg" alt="Mesa Boogie" class="blend-logo">
-                    <img src="assets/Pearl_drum_logo.png" alt="Pearl">
-                    <img src="assets/Remo.svg" alt="Remo">
-                    <img src="assets/Roland_Corporation_logo.svg" alt="Roland">
-                    <img src="assets/Sabian_Cymbals_logo_2019.svg" alt="Sabian">
-                    <img src="assets/Sonor_logo.png" alt="Sonor">
-                    <img src="assets/Tamadrums_logo.png" alt="Tama">
-                    <img src="assets/Yamaha_logo.svg" alt="Yamaha">
-                    <img src="assets/Zildjian_Logo.svg" alt="Zildjian">
-                    <img src="assets/evans-drumheads-3.jpg" alt="Evans" class="blend-logo">
+                    <img src="assets/Ampeg_idPRZj28AB_0.png" alt="Ampeg" decoding="async" loading="lazy">
+                    <img src="assets/Drum_worksh_logo.png" alt="DW" decoding="async" loading="lazy">
+                    <img src="assets/Fender_guitars_logo.svg" alt="Fender" decoding="async" loading="lazy">
+                    <img src="assets/Gibraltar_Logo-white.avif" alt="Gibraltar" decoding="async" loading="lazy">
+                    <img src="assets/Gibson_Guitar_logo.svg" alt="Gibson" decoding="async" loading="lazy">
+                    <img src="assets/Korg_logo.svg" alt="Korg" decoding="async" loading="lazy">
+                    <img src="assets/LOGO-MARKBASS-3-2048x548.avif" alt="Markbass" class="blend-logo" decoding="async" loading="lazy">
+                    <img src="assets/latin-percussion-logo-white.avif" alt="LP" decoding="async" loading="lazy">
+                    <img src="assets/Mapex_drums_logo.png" alt="Mapex" class="blend-logo" decoding="async" loading="lazy">
+                    <img src="assets/Marshall_logo.svg" alt="Marshall" decoding="async" loading="lazy">
+                    <img src="assets/Martin_co_optimized_cleaned.svg" alt="Martin" decoding="async" loading="lazy">
+                    <img src="assets/Meinl_cymbals_logo.png" alt="Meinl" decoding="async" loading="lazy">
+                    <img src="assets/Mesa_Boogie_Engineering_Logo.svg" alt="Mesa Boogie" class="blend-logo" decoding="async" loading="lazy">
+                    <img src="assets/Pearl_drum_logo.png" alt="Pearl" decoding="async" loading="lazy">
+                    <img src="assets/Remo.svg" alt="Remo" decoding="async" loading="lazy">
+                    <img src="assets/Roland_Corporation_logo.svg" alt="Roland" decoding="async" loading="lazy">
+                    <img src="assets/Sabian_Cymbals_logo_2019.svg" alt="Sabian" decoding="async" loading="lazy">
+                    <img src="assets/Sonor_logo.png" alt="Sonor" decoding="async" loading="lazy">
+                    <img src="assets/Tamadrums_logo.png" alt="Tama" decoding="async" loading="lazy">
+                    <img src="assets/Yamaha_logo.svg" alt="Yamaha" decoding="async" loading="lazy">
+                    <img src="assets/Zildjian_Logo.svg" alt="Zildjian" decoding="async" loading="lazy">
+                    <img src="assets/evans-drumheads-3.jpg" alt="Evans" class="blend-logo" decoding="async" loading="lazy">
                 </div>
                 <div class="ticker-content">
-                    <img src="assets/Ampeg_idPRZj28AB_0.png" alt="Ampeg">
-                    <img src="assets/Drum_worksh_logo.png" alt="DW">
-                    <img src="assets/Fender_guitars_logo.svg" alt="Fender">
-                    <img src="assets/Gibraltar_Logo-white.avif" alt="Gibraltar">
-                    <img src="assets/Gibson_Guitar_logo.svg" alt="Gibson">
-                    <img src="assets/Korg_logo.svg" alt="Korg">
-                    <img src="assets/LOGO-MARKBASS-3-2048x548.avif" alt="Markbass" class="blend-logo">
-                    <img src="assets/latin-percussion-logo-white.avif" alt="LP">
-                    <img src="assets/Mapex_drums_logo.png" alt="Mapex" class="blend-logo">
-                    <img src="assets/Marshall_logo.svg" alt="Marshall">
-                    <img src="assets/Martin_co_optimized_cleaned.svg" alt="Martin">
-                    <img src="assets/Meinl_cymbals_logo.png" alt="Meinl">
-                    <img src="assets/Mesa_Boogie_Engineering_Logo.svg" alt="Mesa Boogie" class="blend-logo">
-                    <img src="assets/Pearl_drum_logo.png" alt="Pearl">
-                    <img src="assets/Remo.svg" alt="Remo">
-                    <img src="assets/Roland_Corporation_logo.svg" alt="Roland">
-                    <img src="assets/Sabian_Cymbals_logo_2019.svg" alt="Sabian">
-                    <img src="assets/Sonor_logo.png" alt="Sonor">
-                    <img src="assets/Tamadrums_logo.png" alt="Tama">
-                    <img src="assets/Yamaha_logo.svg" alt="Yamaha">
-                    <img src="assets/Zildjian_Logo.svg" alt="Zildjian">
-                    <img src="assets/evans-drumheads-3.jpg" alt="Evans" class="blend-logo">
+                    <img src="assets/Ampeg_idPRZj28AB_0.png" alt="Ampeg" decoding="async" loading="lazy">
+                    <img src="assets/Drum_worksh_logo.png" alt="DW" decoding="async" loading="lazy">
+                    <img src="assets/Fender_guitars_logo.svg" alt="Fender" decoding="async" loading="lazy">
+                    <img src="assets/Gibraltar_Logo-white.avif" alt="Gibraltar" decoding="async" loading="lazy">
+                    <img src="assets/Gibson_Guitar_logo.svg" alt="Gibson" decoding="async" loading="lazy">
+                    <img src="assets/Korg_logo.svg" alt="Korg" decoding="async" loading="lazy">
+                    <img src="assets/LOGO-MARKBASS-3-2048x548.avif" alt="Markbass" class="blend-logo" decoding="async" loading="lazy">
+                    <img src="assets/latin-percussion-logo-white.avif" alt="LP" decoding="async" loading="lazy">
+                    <img src="assets/Mapex_drums_logo.png" alt="Mapex" class="blend-logo" decoding="async" loading="lazy">
+                    <img src="assets/Marshall_logo.svg" alt="Marshall" decoding="async" loading="lazy">
+                    <img src="assets/Martin_co_optimized_cleaned.svg" alt="Martin" decoding="async" loading="lazy">
+                    <img src="assets/Meinl_cymbals_logo.png" alt="Meinl" decoding="async" loading="lazy">
+                    <img src="assets/Mesa_Boogie_Engineering_Logo.svg" alt="Mesa Boogie" class="blend-logo" decoding="async" loading="lazy">
+                    <img src="assets/Pearl_drum_logo.png" alt="Pearl" decoding="async" loading="lazy">
+                    <img src="assets/Remo.svg" alt="Remo" decoding="async" loading="lazy">
+                    <img src="assets/Roland_Corporation_logo.svg" alt="Roland" decoding="async" loading="lazy">
+                    <img src="assets/Sabian_Cymbals_logo_2019.svg" alt="Sabian" decoding="async" loading="lazy">
+                    <img src="assets/Sonor_logo.png" alt="Sonor" decoding="async" loading="lazy">
+                    <img src="assets/Tamadrums_logo.png" alt="Tama" decoding="async" loading="lazy">
+                    <img src="assets/Yamaha_logo.svg" alt="Yamaha" decoding="async" loading="lazy">
+                    <img src="assets/Zildjian_Logo.svg" alt="Zildjian" decoding="async" loading="lazy">
+                    <img src="assets/evans-drumheads-3.jpg" alt="Evans" class="blend-logo" decoding="async" loading="lazy">
                 </div>
                 <div class="ticker-content">
-                    <img src="assets/Ampeg_idPRZj28AB_0.png" alt="Ampeg">
-                    <img src="assets/Drum_worksh_logo.png" alt="DW">
-                    <img src="assets/Fender_guitars_logo.svg" alt="Fender">
-                    <img src="assets/Gibraltar_Logo-white.avif" alt="Gibraltar">
-                    <img src="assets/Gibson_Guitar_logo.svg" alt="Gibson">
-                    <img src="assets/Korg_logo.svg" alt="Korg">
-                    <img src="assets/LOGO-MARKBASS-3-2048x548.avif" alt="Markbass" class="blend-logo">
-                    <img src="assets/latin-percussion-logo-white.avif" alt="LP">
-                    <img src="assets/Mapex_drums_logo.png" alt="Mapex" class="blend-logo">
-                    <img src="assets/Marshall_logo.svg" alt="Marshall">
-                    <img src="assets/Martin_co_optimized_cleaned.svg" alt="Martin">
-                    <img src="assets/Meinl_cymbals_logo.png" alt="Meinl">
-                    <img src="assets/Mesa_Boogie_Engineering_Logo.svg" alt="Mesa Boogie" class="blend-logo">
-                    <img src="assets/Pearl_drum_logo.png" alt="Pearl">
-                    <img src="assets/Remo.svg" alt="Remo">
-                    <img src="assets/Roland_Corporation_logo.svg" alt="Roland">
-                    <img src="assets/Sabian_Cymbals_logo_2019.svg" alt="Sabian">
-                    <img src="assets/Sonor_logo.png" alt="Sonor">
-                    <img src="assets/Tamadrums_logo.png" alt="Tama">
-                    <img src="assets/Yamaha_logo.svg" alt="Yamaha">
-                    <img src="assets/Zildjian_Logo.svg" alt="Zildjian">
-                    <img src="assets/evans-drumheads-3.jpg" alt="Evans" class="blend-logo">
+                    <img src="assets/Ampeg_idPRZj28AB_0.png" alt="Ampeg" decoding="async" loading="lazy">
+                    <img src="assets/Drum_worksh_logo.png" alt="DW" decoding="async" loading="lazy">
+                    <img src="assets/Fender_guitars_logo.svg" alt="Fender" decoding="async" loading="lazy">
+                    <img src="assets/Gibraltar_Logo-white.avif" alt="Gibraltar" decoding="async" loading="lazy">
+                    <img src="assets/Gibson_Guitar_logo.svg" alt="Gibson" decoding="async" loading="lazy">
+                    <img src="assets/Korg_logo.svg" alt="Korg" decoding="async" loading="lazy">
+                    <img src="assets/LOGO-MARKBASS-3-2048x548.avif" alt="Markbass" class="blend-logo" decoding="async" loading="lazy">
+                    <img src="assets/latin-percussion-logo-white.avif" alt="LP" decoding="async" loading="lazy">
+                    <img src="assets/Mapex_drums_logo.png" alt="Mapex" class="blend-logo" decoding="async" loading="lazy">
+                    <img src="assets/Marshall_logo.svg" alt="Marshall" decoding="async" loading="lazy">
+                    <img src="assets/Martin_co_optimized_cleaned.svg" alt="Martin" decoding="async" loading="lazy">
+                    <img src="assets/Meinl_cymbals_logo.png" alt="Meinl" decoding="async" loading="lazy">
+                    <img src="assets/Mesa_Boogie_Engineering_Logo.svg" alt="Mesa Boogie" class="blend-logo" decoding="async" loading="lazy">
+                    <img src="assets/Pearl_drum_logo.png" alt="Pearl" decoding="async" loading="lazy">
+                    <img src="assets/Remo.svg" alt="Remo" decoding="async" loading="lazy">
+                    <img src="assets/Roland_Corporation_logo.svg" alt="Roland" decoding="async" loading="lazy">
+                    <img src="assets/Sabian_Cymbals_logo_2019.svg" alt="Sabian" decoding="async" loading="lazy">
+                    <img src="assets/Sonor_logo.png" alt="Sonor" decoding="async" loading="lazy">
+                    <img src="assets/Tamadrums_logo.png" alt="Tama" decoding="async" loading="lazy">
+                    <img src="assets/Yamaha_logo.svg" alt="Yamaha" decoding="async" loading="lazy">
+                    <img src="assets/Zildjian_Logo.svg" alt="Zildjian" decoding="async" loading="lazy">
+                    <img src="assets/evans-drumheads-3.jpg" alt="Evans" class="blend-logo" decoding="async" loading="lazy">
                 </div>
             </div>
         </div>
@@ -166,7 +229,7 @@
                     <a href="#services" class="link-secondary">Learn More &rarr;</a>
                 </div>
                 <div class="about-image-wrapper">
-                    <div class="about-image"></div>
+                    <div class="about-image lazy-bg" data-bg="assets/TEAM.png"></div>
                 </div>
             </div>
         </div>
